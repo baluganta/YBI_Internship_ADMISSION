@@ -1,0 +1,62 @@
+# YBI Foundation Internship
+
+# IMPORT LIBRARY
+import pandas as pd
+
+# IMPORT DATA
+admission = pd.read_csv('https://github.com/ybifoundation/Dataset/raw/main/Admission%20Chance.csv')
+
+# Display first few rows of the dataset
+admission.head()
+
+# Display information about the dataset, including data types and non-null counts
+admission.info()
+
+# Display summary statistics for numerical columns in the dataset
+admission.describe()
+
+# DEFINE TARGET (Y) AND FEATURES(X)
+y = admission['Chance of Admit ']
+x = admission.drop(['Chance of Admit '], axis=1)
+
+# Display column names of the dataset
+admission.columns
+
+# TRAIN TEST SPLIT
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random_state=2529)
+
+# Check shape of train and test samples
+x_train.shape, x_test.shape, y_train.shape, y_test.shape
+
+# SELECT MODEL
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+
+# TRAIN OR FIT MODEL
+model.fit(x_train, y_train)
+
+# Display the instantiated LinearRegression model
+LinearRegression()
+
+# Display the intercept of the trained model
+model.intercept_
+
+# Display the coefficients of the trained model
+model.coef_
+
+# PREDICT MODEL
+y_pred = model.predict(x_test)
+y_pred
+
+# MODEL ACCURACY
+from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error, mean_squared_error
+
+# Calculate mean absolute error (MAE)
+mean_absolute_error(y_test, y_pred)
+
+# Calculate mean absolute percentage error (MAPE)
+mean_absolute_percentage_error(y_test, y_pred)
+
+# Calculate mean squared error (MSE)
+mean_squared_error(y_test, y_pred)
